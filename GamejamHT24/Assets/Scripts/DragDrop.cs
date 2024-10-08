@@ -9,6 +9,7 @@ public class DragDrop : MonoBehaviour
     private GameObject selectedObject;
     private Vector3 offset;
 
+    private Plane dragPlane;
 
     void Update()
     {
@@ -28,23 +29,33 @@ public class DragDrop : MonoBehaviour
                     {
                         return;
                     }
+
                     selectedObject = hit.collider.gameObject;
+                    dragPlane = new Plane(Vector3.up, new Vector3(0, moveHeight, 0));
+
+                    Vector3 objectPos = selectedObject.transform.position;
+                    Vector3 mouseWorldPos = GetMouseWorldPosition(objectPos);
+                    offset = objectPos - mouseWorldPos;
+                    selectedObject.transform.position = new Vector3(objectPos.x, moveHeight, objectPos.z);
+
                     Cursor.visible = false;
                 }
             }
         }
 
-        if (selectedObject != null)
+        if (selectedObject != null && Input.GetMouseButton(0))
         {
             changeSelectedObjectPosition(moveHeight);
         }
+
         if (Input.GetMouseButtonUp(0))
         {
             if (selectedObject != null)
             {
-                changeSelectedObjectPosition(moveHeight);
-                selectedObject = null;
-                Cursor.visible = true;
+                Vector3 finalPos = selectedObject.transform.position;
+                selectedObject.transform.position = new Vector3(finalPos.x, moveHeight, finalPos.z);
+                selectedObject = null; 
+                Cursor.visible = true; 
             }
         }
     }
@@ -59,10 +70,20 @@ public class DragDrop : MonoBehaviour
         Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit);
         return hit;
     }
+    private Vector3 GetMouseWorldPosition(Vector3 objectPos)
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        float distance;
+        if (dragPlane.Raycast(ray, out distance))
+        {
+            return ray.GetPoint(distance); 
+        }
+        return objectPos; 
+    }
+
     private void changeSelectedObjectPosition(float height)
     {
-        Vector3 position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(selectedObject.transform.position).z);
-        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(position);
-        selectedObject.transform.position = new Vector3(worldPosition.x, height, worldPosition.z);
+        Vector3 mouseWorldPosition = GetMouseWorldPosition(selectedObject.transform.position);
+        selectedObject.transform.position = new Vector3(mouseWorldPosition.x + offset.x, height, mouseWorldPosition.z + offset.z);
     }
 }
