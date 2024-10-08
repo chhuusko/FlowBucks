@@ -25,9 +25,9 @@ public class ScoreManager : MonoBehaviour
         highscoreText.text = "HIGHSCORE: " + highscore.ToString();
     }
 
-    public void AddScore()
+    public void AddScore(int multiplier)
     {
-        score += 1; //Change to correct value for order completion
+        score += 1 * multiplier; //Change to correct value for order completion
         scoreText.text = "SCORE: " + score.ToString();
         if (highscore < score)
         {

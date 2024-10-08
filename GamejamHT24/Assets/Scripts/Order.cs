@@ -10,6 +10,9 @@ public class Order : MonoBehaviour
     public static string recentRecepit;
     public static int ordersCompleted = 0;
 
+    private int consecutiveCorrectItems = 0;
+    private int multiplier = 1;
+
     // Save all generated orders in dictionary.
     private Dictionary<ItemTypes, int> orders = new Dictionary<ItemTypes, int>();
 
@@ -36,6 +39,7 @@ public class Order : MonoBehaviour
 
         ItemTypes item = other.GetComponent<Item>().GetPastryType();
 
+
         if (orders.ContainsKey(item))
         {
             orders[item]--;
@@ -44,10 +48,23 @@ public class Order : MonoBehaviour
             {
                 orders.Remove(item);
             }
+
+            consecutiveCorrectItems++;
+
+            if (consecutiveCorrectItems >= 5)
+            {
+                multiplier *= 2; 
+                consecutiveCorrectItems = 0; 
+            }
+
+            ScoreManager.instance.AddScore(multiplier);
         }
 
         else
         {
+            consecutiveCorrectItems = 0;
+            multiplier = 1;
+
             Destroy(other.gameObject, 0.1f);
         }
 
