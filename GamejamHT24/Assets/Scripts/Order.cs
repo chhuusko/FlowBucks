@@ -14,11 +14,13 @@ public class Order : MonoBehaviour
     private Dictionary<ItemTypes, int> orders = new Dictionary<ItemTypes, int>();
 
     private int points;
+    private bool bonusPoints = true;
 
     // Start is called before the first frame update
     void Start()
     {
         GenerateOrder();
+        StartCoroutine("Despawn");
     }
 
     // Update is called once per frame
@@ -101,6 +103,11 @@ public class Order : MonoBehaviour
         }
 
         points = 1 + Mathf.RoundToInt(itemAmount * UnityEngine.Random.Range(1, 4) * (ordersCompleted * 0.25f));
+
+        if (bonusPoints)
+        {
+            points *= 2;
+        }
     }
 
     private void CheckHover()
@@ -141,5 +148,17 @@ public class Order : MonoBehaviour
         text.transform.position = transform.position + new Vector3(0, 0, -0.4f);
         text.transform.LookAt(Camera.main.transform);
         text.transform.rotation = Quaternion.Euler(new Vector3(60, 0, 0));
+    }
+
+    private IEnumerator Despawn()
+    {
+        yield return new WaitForSeconds(UnityEngine.Random.Range(8, 13));
+        Destroy(gameObject);
+    }
+
+    private IEnumerator RemoveBonus()
+    {
+        yield return new WaitForSeconds(UnityEngine.Random.Range(4, 7));
+        bonusPoints = false;
     }
 }
