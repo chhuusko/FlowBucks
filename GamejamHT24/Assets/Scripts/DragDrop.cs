@@ -15,7 +15,10 @@ public class DragDrop : MonoBehaviour
     {
         moveObject();
     }
-
+    private void OnDestroy()
+    {
+        Cursor.visible = true;
+    }
     private void moveObject()
     {
         if (Input.GetMouseButtonDown(0))
