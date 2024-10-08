@@ -29,6 +29,9 @@ public class Order : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!other.gameObject.CompareTag("draggable"))
+            return;
+
         ItemTypes item = other.GetComponent<Item>().GetPastryType();
 
         if (orders.ContainsKey(item))
