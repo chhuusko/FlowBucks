@@ -10,6 +10,8 @@ public class Order : MonoBehaviour
     // Save all generated orders in dictionary.
     private Dictionary<ItemTypes, int> orders = new Dictionary<ItemTypes, int>();
 
+    private int points;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +40,14 @@ public class Order : MonoBehaviour
                 break;
             }
         }
+
+        if (orders.Count <= 0)
+        {
+            ScoreManager scoreManager = GameObject.Find("Canvas").GetComponent<ScoreManager>();
+            scoreManager.AddScore();
+
+            Destroy(gameObject, 0.1f);
+        }
     }
 
     private void GenerateOrder()
@@ -53,6 +63,19 @@ public class Order : MonoBehaviour
                 orders.Add(item, amount);
             }
         }
+        GeneratePointValue();
+    }
+
+    private void GeneratePointValue()
+    {
+        int itemAmount = 0;
+
+        foreach (int i in orders.Values) 
+        {
+            itemAmount += i;
+        }
+
+        points = Mathf.RoundToInt(itemAmount * UnityEngine.Random.Range(1, 5));
     }
 
     private void CheckHover()
