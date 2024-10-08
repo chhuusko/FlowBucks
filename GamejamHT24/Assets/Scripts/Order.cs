@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Order : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class Order : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckHover();
+        //CheckHover();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -71,7 +72,7 @@ public class Order : MonoBehaviour
 
     private void GenerateOrder()
     {
-        int maxOrders = UnityEngine.Random.Range(1, 4);
+        int maxOrders = 2000;
         for (int i = 0; i < maxOrders; i++)
         {
             int amount = UnityEngine.Random.Range(1, 4);
@@ -83,6 +84,7 @@ public class Order : MonoBehaviour
             }
         }
         GeneratePointValue();
+        PrintReceipt();
     }
 
     private void GeneratePointValue()
@@ -123,10 +125,14 @@ public class Order : MonoBehaviour
             receipt += orders[item] + "x " + item.ToString() + "\n";
         }
 
-        if (!receipt.Equals(recentRecepit))
-        {
-            recentRecepit = receipt;
-            Debug.Log(receipt);
-        }
+        //if (!receipt.Equals(recentRecepit))
+        //{
+        //    recentRecepit = receipt;
+        //    Debug.Log(receipt);
+        //}
+
+        Transform text = transform.Find("Canvas").Find("Receipt");
+
+        text.GetComponent<Text>().text = receipt;
     }
 }
