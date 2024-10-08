@@ -6,7 +6,7 @@ public class Item : MonoBehaviour
 {
     [SerializeField] private ItemTypes type;
 
-    public ItemTypes GetType()
+    public ItemTypes GetPastryType()
     {
         return type;
     }

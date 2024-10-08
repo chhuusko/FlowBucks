@@ -26,7 +26,7 @@ public class Order : MonoBehaviour
     {
         foreach (ItemTypes item in orders.Keys)
         {
-            if (other.gameObject.GetComponent<Item>().GetType() == item)
+            if (other.gameObject.GetComponent<Item>().GetPastryType() == item)
             {
                 orders[item]--;
 
