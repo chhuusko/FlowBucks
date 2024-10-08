@@ -27,20 +27,37 @@ public class Order : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        foreach (ItemTypes item in orders.Keys)
+        ItemTypes item = other.GetComponent<Item>().GetPastryType();
+
+        if (orders.ContainsKey(item))
         {
-            if (other.gameObject.GetComponent<Item>().GetPastryType() == item)
+            orders[item]--;
+
+            if (orders[item] <= 0)
             {
-                orders[item]--;
-
-                if (orders[item] <= 0)
-                {
-                    orders.Remove(item);
-                }
-
-                break;
+                orders.Remove(item);
             }
         }
+
+        else
+        {
+            Destroy(other.gameObject, 0.1f);
+        }
+
+        //foreach (ItemTypes item in orders.Keys)
+        //{
+        //    if (other.gameObject.GetComponent<Item>().GetPastryType() == item)
+        //    {
+        //        orders[item]--;
+
+        //        if (orders[item] <= 0)
+        //        {
+        //            orders.Remove(item);
+        //        }
+
+        //        break;
+        //    }
+        //}
 
         if (orders.Count <= 0)
         {
