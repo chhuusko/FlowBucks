@@ -38,6 +38,14 @@ public class Order : MonoBehaviour
                 break;
             }
         }
+
+        if (orders.Count <= 0)
+        {
+            ScoreManager scoreManager = GameObject.Find("Canvas").GetComponent<ScoreManager>();
+            scoreManager.AddScore();
+
+            Destroy(gameObject, 0.1f);
+        }
     }
 
     private void GenerateOrder()
