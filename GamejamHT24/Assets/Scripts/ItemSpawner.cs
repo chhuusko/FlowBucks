@@ -30,7 +30,7 @@ public class ItemSpawner : MonoBehaviour
             }
 
             // Väntar en slumpmässig tid mellan 1 och 5 sekunder
-            int randomSpawnDelayNum = Random.Range(1, 5);
+            int randomSpawnDelayNum = Random.Range(2, 6);
             Debug.Log(randomSpawnDelayNum);
             yield return new WaitForSeconds(randomSpawnDelayNum);
         }
