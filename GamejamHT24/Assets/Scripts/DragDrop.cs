@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DragDrop : MonoBehaviour
 {
-    [SerializeField] private float normalHeight = 1.075f;
+    //[SerializeField] private float normalHeight = 1.075f; ifall man skulle vilja ha ett värde som den automatiskt hoppar ner till istället för gravitation
     [SerializeField] private float moveHeight = 1.3f;
     private GameObject selectedObject;
     private Vector3 offset;
