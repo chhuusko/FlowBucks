@@ -4,7 +4,8 @@ using System.Collections;
 
 public class InGameClock : MonoBehaviour
 {
-    public Text clockText; 
+    public Text clockText;
+    public float timePassed = 0f;
     private int hour = 8;
     private int minute = 0;
     private float timeInterval = 1f; 
@@ -12,6 +13,11 @@ public class InGameClock : MonoBehaviour
     void Start()
     {
         StartCoroutine(UpdateClock());
+    }
+
+    void Update()
+    {
+        timePassed += Time.deltaTime;
     }
 
     IEnumerator UpdateClock()
