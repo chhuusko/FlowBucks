@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Order : MonoBehaviour
 {
@@ -13,11 +14,13 @@ public class Order : MonoBehaviour
     private Dictionary<ItemTypes, int> orders = new Dictionary<ItemTypes, int>();
 
     private int points;
+    private bool bonusPoints = true;
 
     // Start is called before the first frame update
     void Start()
     {
         GenerateOrder();
+        StartCoroutine("Despawn");
     }
 
     // Update is called once per frame
@@ -28,6 +31,9 @@ public class Order : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!other.gameObject.CompareTag("draggable"))
+            return;
+
         ItemTypes item = other.GetComponent<Item>().GetPastryType();
 
         if (orders.ContainsKey(item))
@@ -97,6 +103,11 @@ public class Order : MonoBehaviour
         }
 
         points = 1 + Mathf.RoundToInt(itemAmount * UnityEngine.Random.Range(1, 4) * (ordersCompleted * 0.25f));
+
+        if (bonusPoints)
+        {
+            points *= 2;
+        }
     }
 
     private void CheckHover()
@@ -133,6 +144,21 @@ public class Order : MonoBehaviour
 
         Transform text = transform.Find("Canvas").Find("Receipt");
 
-        text.GetComponent<Text>().text = receipt;
+        text.GetComponent<TMP_Text>().text = receipt;
+        text.transform.position = transform.position + new Vector3(0, 0, -0.4f);
+        text.transform.LookAt(Camera.main.transform);
+        text.transform.rotation = Quaternion.Euler(new Vector3(60, 0, 0));
+    }
+
+    private IEnumerator Despawn()
+    {
+        yield return new WaitForSeconds(UnityEngine.Random.Range(8, 13));
+        Destroy(gameObject);
+    }
+
+    private IEnumerator RemoveBonus()
+    {
+        yield return new WaitForSeconds(UnityEngine.Random.Range(4, 7));
+        bonusPoints = false;
     }
 }

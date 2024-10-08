@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,6 +123,83 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &143237711
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 3d8fc2e5918ef1e45a62c82c936dac3e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3d8fc2e5918ef1e45a62c82c936dac3e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3d8fc2e5918ef1e45a62c82c936dac3e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3d8fc2e5918ef1e45a62c82c936dac3e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.061
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3d8fc2e5918ef1e45a62c82c936dac3e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.077
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3d8fc2e5918ef1e45a62c82c936dac3e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.105
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3d8fc2e5918ef1e45a62c82c936dac3e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7150182
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3d8fc2e5918ef1e45a62c82c936dac3e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3d8fc2e5918ef1e45a62c82c936dac3e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.69910586
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3d8fc2e5918ef1e45a62c82c936dac3e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3d8fc2e5918ef1e45a62c82c936dac3e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3d8fc2e5918ef1e45a62c82c936dac3e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -88.711
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3d8fc2e5918ef1e45a62c82c936dac3e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3d8fc2e5918ef1e45a62c82c936dac3e, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 3d8fc2e5918ef1e45a62c82c936dac3e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ab0d634e06de38942b49b518300c8218, type: 2}
+    - target: {fileID: 919132149155446097, guid: 3d8fc2e5918ef1e45a62c82c936dac3e, type: 3}
+      propertyPath: m_Name
+      value: tray
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3d8fc2e5918ef1e45a62c82c936dac3e, type: 3}
 --- !u!1 &181908840
 GameObject:
   m_ObjectHideFlags: 0
@@ -1068,6 +1145,10 @@ PrefabInstance:
       propertyPath: m_LightProbeUsage
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 0cad742327ffbef409f23d00fe2b8507, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 43ba3610726e3e74d809c70254110170, type: 2}
     - target: {fileID: 919132149155446097, guid: 0cad742327ffbef409f23d00fe2b8507, type: 3}
       propertyPath: m_Name
       value: countertop_ver1
@@ -1122,3 +1203,4 @@ SceneRoots:
   - {fileID: 1153262152}
   - {fileID: 894292463}
   - {fileID: 1926794106}
+  - {fileID: 143237711}
