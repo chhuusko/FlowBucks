@@ -6,6 +6,7 @@ using UnityEngine;
 public class Order : MonoBehaviour
 {
     public static string recentRecepit;
+    public static int ordersCompleted = 0;
 
     // Save all generated orders in dictionary.
     private Dictionary<ItemTypes, int> orders = new Dictionary<ItemTypes, int>();
@@ -45,6 +46,7 @@ public class Order : MonoBehaviour
         {
             ScoreManager scoreManager = GameObject.Find("Canvas").GetComponent<ScoreManager>();
             scoreManager.AddScore();
+            ordersCompleted++;
 
             Destroy(gameObject, 0.1f);
         }
@@ -75,7 +77,7 @@ public class Order : MonoBehaviour
             itemAmount += i;
         }
 
-        points = Mathf.RoundToInt(itemAmount * UnityEngine.Random.Range(1, 5));
+        points = 1 + Mathf.RoundToInt(itemAmount * UnityEngine.Random.Range(1, 4) * (ordersCompleted * 0.25f));
     }
 
     private void CheckHover()
