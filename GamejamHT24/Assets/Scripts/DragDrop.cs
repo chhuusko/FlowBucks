@@ -28,7 +28,8 @@ public class DragDrop : MonoBehaviour
                 RaycastHit hit = CastRay();
                 if (hit.collider != null)
                 {
-                    if (!hit.collider.CompareTag("draggable"))
+                    Item itemComponent = hit.collider.gameObject.GetComponent<Item>();
+                    if (!hit.collider.CompareTag("draggable") || itemComponent == null || itemComponent.onPlate)
                     {
                         return;
                     }
