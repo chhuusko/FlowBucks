@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -230,7 +230,7 @@ MonoBehaviour:
   - {fileID: 1851808229}
   - {fileID: 41962382}
   - {fileID: 152476112}
-  gameClock: {fileID: 0}
+  gameClock: {fileID: 820265124}
 --- !u!4 &102137411
 Transform:
   m_ObjectHideFlags: 0
@@ -445,7 +445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 970f9425fd39cf04988f5e9ebf86c104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
+  canvas: {fileID: 820265123}
   originalbeltSpeed: 1
   timeDividerValue: 100
 --- !u!65 &477005674
@@ -628,6 +628,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &820265123 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4781838882313634150, guid: 8bb05384d5a00c84cb5014f4b527846b, type: 3}
+  m_PrefabInstance: {fileID: 279805664}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &820265124 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1776840654966096252, guid: 8bb05384d5a00c84cb5014f4b527846b, type: 3}
+  m_PrefabInstance: {fileID: 279805664}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820265123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 863df65f3e275c4469a4774d2266d8b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &828319428
 PrefabInstance:
   m_ObjectHideFlags: 0
