@@ -26,15 +26,15 @@ public class ScoreManager : MonoBehaviour
     void Start()
     {
         highscore = PlayerPrefs.GetInt("highscore", 0);
-        scoreText.text = "SCORE: " + score.ToString();
-        highscoreText.text = "HIGHSCORE: " + highscore.ToString();
+        scoreText.text = "$ made: " + score.ToString();
+        highscoreText.text = "Target $: " + highscore.ToString();
         UpdateMultiplierText();
     }
 
     public void AddScore(int points)
     {
         score += points * multiplier;
-        scoreText.text = "SCORE: " + score.ToString();
+        scoreText.text = "$ made: " + score.ToString();
         if (highscore < score)
         {
             PlayerPrefs.SetInt("highscore", score);
@@ -43,7 +43,7 @@ public class ScoreManager : MonoBehaviour
 
     public void UpdateMultiplierText()
     {
-        multiplierText.text = multiplier + "x"; 
+        multiplierText.text = "Flow " + multiplier + "x"; 
     }
 
     public void IncreaseStreak()
