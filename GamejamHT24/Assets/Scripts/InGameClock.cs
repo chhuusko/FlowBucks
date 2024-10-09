@@ -8,11 +8,14 @@ public class InGameClock : MonoBehaviour
     public float timePassed = 0f;
     private int hour = 8;
     private int minute = 0;
-    private float timeInterval = 5f; 
+    private float timeInterval = 5f;
+
+    public GameObject EndScreen;
 
     void Start()
     {
         StartCoroutine(UpdateClock());
+        EndScreen.SetActive(false);
     }
 
     void Update()
@@ -56,6 +59,8 @@ public class InGameClock : MonoBehaviour
     void EndGame()
     {
         Debug.Log("Game Over! The time is 22:00."); //load a "Game Over" scene
+        EndScreen.SetActive(true); 
+        Time.timeScale = 0;
     }
 }
 
