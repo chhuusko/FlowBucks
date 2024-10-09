@@ -8,7 +8,7 @@ public class InGameClock : MonoBehaviour
     public float timePassed = 0f;
     private int hour = 8;
     private int minute = 0;
-    private float timeInterval = 2f;
+    private float timeInterval = 5f;
 
     public GameObject EndScreenWin;  
     public GameObject EndScreenLoss;
