@@ -10,25 +10,16 @@ public class Order : MonoBehaviour
     public static string recentRecepit;
     public static int ordersCompleted = 0;
 
-    private int consecutiveCorrectItems = 0;
-    private int multiplier = 1;
-
     // Save all generated orders in dictionary.
     private Dictionary<ItemTypes, int> orders = new Dictionary<ItemTypes, int>();
 
-    private int points;
     private bool bonusPoints = true;
+    private int points;
 
     // Start is called before the first frame update
     void Start()
     {
         GenerateOrder();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //CheckHover();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -42,52 +33,25 @@ public class Order : MonoBehaviour
         if (orders.ContainsKey(item))
         {
             orders[item]--;
+            ScoreManager.instance.IncreaseStreak();
 
             if (orders[item] <= 0)
             {
                 orders.Remove(item);
             }
-
-            consecutiveCorrectItems++;
-
-            if (consecutiveCorrectItems >= 5)
-            {
-                multiplier *= 2; 
-                consecutiveCorrectItems = 0; 
-            }
-
-            ScoreManager.instance.AddScore(multiplier);
-            ScoreManager.instance.UpdateMultiplierText(multiplier);
         }
 
         else
         {
-            consecutiveCorrectItems = 0;
-            multiplier = 1;
-
-            ScoreManager.instance.UpdateMultiplierText(multiplier);
+            ScoreManager.instance.ResetStreak();
             StartCoroutine(GameObject.Find("TrayManager").GetComponent<TrayManager>().CompleteOrder(gameObject));
         }
 
-        //foreach (ItemTypes item in orders.Keys)
-        //{
-        //    if (other.gameObject.GetComponent<Item>().GetPastryType() == item)
-        //    {
-        //        orders[item]--;
-
-        //        if (orders[item] <= 0)
-        //        {
-        //            orders.Remove(item);
-        //        }
-
-        //        break;
-        //    }
-        //}
-
+        // Completes the order if there are no more items needed.
         if (orders.Count <= 0)
         {
             ScoreManager scoreManager = GameObject.Find("Canvas").GetComponent<ScoreManager>();
-            scoreManager.AddScore(multiplier);
+            scoreManager.AddScore(points);
             ordersCompleted++;
 
             Destroy(gameObject, 0.1f);
@@ -153,12 +117,6 @@ public class Order : MonoBehaviour
         {
             receipt += orders[item] + "x " + item.ToString() + "\n";
         }
-
-        //if (!receipt.Equals(recentRecepit))
-        //{
-        //    recentRecepit = receipt;
-        //    Debug.Log(receipt);
-        //}
 
         Transform text = transform.Find("Canvas").Find("Receipt");
 
