@@ -78,7 +78,7 @@ public class TrayManager : MonoBehaviour
 
     IEnumerator Despawn(GameObject tray, int index)
     {
-        yield return new WaitForSeconds(UnityEngine.Random.Range(8, 13));
+        yield return new WaitForSeconds(16);
         MarkLocationAsFree(index);
         Destroy(tray);
     }
