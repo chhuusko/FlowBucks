@@ -53,10 +53,10 @@ public class ScoreManager : MonoBehaviour
             case "Main":
                 targetScore = 100;
                 break;
-            case "Day2":
+            case "Day 2":
                 targetScore = 200;
                 break;
-            case "Day3":
+            case "Day 3":
                 targetScore = 300;
                 break;
         }
@@ -70,6 +70,11 @@ public class ScoreManager : MonoBehaviour
         //{
         //    PlayerPrefs.SetInt("highscore", score);
         //}
+    }
+
+    public bool HasReachedTargetScore()
+    {
+        return score >= targetScore;
     }
 
     public void UpdateMultiplierText()
