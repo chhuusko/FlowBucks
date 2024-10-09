@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using static System.Net.Mime.MediaTypeNames;
 
 public class Order : MonoBehaviour
 {
@@ -13,9 +14,11 @@ public class Order : MonoBehaviour
     // Save all generated orders in dictionary.
     private Dictionary<ItemTypes, int> orders = new Dictionary<ItemTypes, int>();
     private List<GameObject> items = new List<GameObject>();
+    [SerializeField] private Sprite[] sprites = new Sprite[0];
 
+    [SerializeField] private UnityEngine.UI.Image clockImage;
     private bool bonusPoints = true;
-    private int points;
+    private int points;    
 
     // Start is called before the first frame update
     void Start()
@@ -45,8 +48,7 @@ public class Order : MonoBehaviour
 
         else
         {
-            ScoreManager.instance.ResetStreak();
-            StartCoroutine(GameObject.Find("TrayManager").GetComponent<TrayManager>().CompleteOrder(gameObject));
+            ScoreManager.instance.ResetStreak();   
             Destroy(other);
         }
 
@@ -56,21 +58,16 @@ public class Order : MonoBehaviour
             ScoreManager scoreManager = GameObject.Find("Canvas").GetComponent<ScoreManager>();
             scoreManager.AddScore(points);
             ordersCompleted++;
-
-            Destroy(gameObject, 0.1f);
+            StartCoroutine(GameObject.Find("TrayManager").GetComponent<TrayManager>().CompleteOrder(gameObject));
         }
     }
 
     private void GenerateOrder()
     {
-        Debug.Log("currentmax = " + DifficultyIncrease.CurrentMax);
-
         int lines = UnityEngine.Random.Range(1, DifficultyIncrease.CurrentMax + 1);
-        Debug.Log("Lines = " + lines);
         for (int i = 0; i < lines; i++)
         {
             int amount = UnityEngine.Random.Range(1, DifficultyIncrease.CurrentMax + 1);
-            Debug.Log("Amount = " + amount);
             ItemTypes item = (ItemTypes)UnityEngine.Random.Range(0, 3);
 
             if (!orders.ContainsKey(item))
@@ -80,6 +77,10 @@ public class Order : MonoBehaviour
         }
         GeneratePointValue();
         PrintReceipt();
+        StartCoroutine(ChangeClock());
+        clockImage.transform.position = transform.position + new Vector3(0.4f, 0.1f, -0.4f);
+        clockImage.transform.LookAt(Camera.main.transform);
+        clockImage.transform.rotation = Quaternion.Euler(new Vector3(60, 0, 0));
     }
 
     private void GeneratePointValue()
@@ -96,6 +97,18 @@ public class Order : MonoBehaviour
         if (bonusPoints)
         {
             points *= 2;
+        }
+    }
+
+    private IEnumerator ChangeClock()
+    {
+        int totalTime = 0;
+
+        while (totalTime < 16)
+        {
+            clockImage.sprite = sprites[totalTime / 4];
+            yield return new WaitForSeconds(4);
+            totalTime += 4;
         }
     }
 

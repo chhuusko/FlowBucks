@@ -10,7 +10,7 @@ public class ItemSpawner : MonoBehaviour
     [SerializeField] private GameObject canvas;
     [SerializeField] private float timeDividerValue = 100f;
     private InGameClock inGameClock;
-    private int randomRange1 = 3, randomRange2 = 6;
+    private int randomRange1 = 5, randomRange2 = 8;
     private float time;
 
 
