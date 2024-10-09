@@ -124,7 +124,7 @@ public class Order : MonoBehaviour
         Transform text = transform.Find("Canvas").Find("Receipt");
 
         text.GetComponent<TMP_Text>().text = receipt;
-        text.transform.position = transform.position + new Vector3(0, 0, -0.4f);
+        text.transform.position = transform.position + new Vector3(0, 0.1f, -0.4f);
         text.transform.LookAt(Camera.main.transform);
         text.transform.rotation = Quaternion.Euler(new Vector3(60, 0, 0));
     }
