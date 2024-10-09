@@ -1128,7 +1128,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5265652746137372118, guid: 8bb05384d5a00c84cb5014f4b527846b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -192
+      value: -121
       objectReference: {fileID: 0}
     - target: {fileID: 5265652746137372118, guid: 8bb05384d5a00c84cb5014f4b527846b, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1164,7 +1164,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7968729446239760114, guid: 8bb05384d5a00c84cb5014f4b527846b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 187
+      value: 116
       objectReference: {fileID: 0}
     - target: {fileID: 7968729446239760114, guid: 8bb05384d5a00c84cb5014f4b527846b, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1631,7 +1631,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 820265123}
   originalbeltSpeed: 1
-  originalAnimationSpeed: 1
+  originalAnimationSpeed: 0.8
   timeDividerValue: 100
   animationDividerValue: 100
 --- !u!1 &705507993
