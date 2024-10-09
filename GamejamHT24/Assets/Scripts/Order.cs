@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using static System.Net.Mime.MediaTypeNames;
 
 public class Order : MonoBehaviour
 {
@@ -15,8 +16,9 @@ public class Order : MonoBehaviour
     private List<GameObject> items = new List<GameObject>();
     [SerializeField] private Sprite[] sprites = new Sprite[0];
 
+    [SerializeField] private UnityEngine.UI.Image clockImage;
     private bool bonusPoints = true;
-    private int points;
+    private int points;    
 
     // Start is called before the first frame update
     void Start()
@@ -75,6 +77,10 @@ public class Order : MonoBehaviour
         }
         GeneratePointValue();
         PrintReceipt();
+        StartCoroutine(ChangeClock());
+        clockImage.transform.position = transform.position + new Vector3(0.4f, 0.1f, -0.4f);
+        clockImage.transform.LookAt(Camera.main.transform);
+        clockImage.transform.rotation = Quaternion.Euler(new Vector3(60, 0, 0));
     }
 
     private void GeneratePointValue()
@@ -91,6 +97,18 @@ public class Order : MonoBehaviour
         if (bonusPoints)
         {
             points *= 2;
+        }
+    }
+
+    private IEnumerator ChangeClock()
+    {
+        int totalTime = 0;
+
+        while (totalTime < 16)
+        {
+            clockImage.sprite = sprites[totalTime / 4];
+            yield return new WaitForSeconds(4);
+            totalTime += 4;
         }
     }
 
