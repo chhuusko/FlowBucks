@@ -36,7 +36,7 @@ public class TrayManager : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(15);
+            yield return new WaitForSeconds(40);
             spawnPointAmount++;
 
             if (spawnPointAmount >= spawnLocations.Length)
