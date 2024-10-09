@@ -45,5 +45,10 @@ public class Item : MonoBehaviour
             Plate = collision.gameObject.GetComponent<Item>().Plate;
             Plate.GetComponent<Order>().HandleCollsion(gameObject);
         }
+
+        else if (collision.gameObject.CompareTag("Countertop"))
+        {
+            Destroy(gameObject);
+        }
     }
 }
