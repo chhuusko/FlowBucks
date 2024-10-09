@@ -45,6 +45,7 @@ public class Order : MonoBehaviour
         {
             ScoreManager.instance.ResetStreak();
             StartCoroutine(GameObject.Find("TrayManager").GetComponent<TrayManager>().CompleteOrder(gameObject));
+            Destroy(other.gameObject);
         }
 
         // Completes the order if there are no more items needed.
