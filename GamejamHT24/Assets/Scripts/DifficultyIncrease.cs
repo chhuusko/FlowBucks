@@ -19,10 +19,13 @@ public class DifficultyIncrease : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+#if UNITY_EDITOR
+        // Increases the difficulty to max for testing.
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             CurrentMax = max;
         }
+#endif
     }
 
     private IEnumerator IncreaseMax()
