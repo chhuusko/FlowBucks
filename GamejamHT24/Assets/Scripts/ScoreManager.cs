@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-    public static ScoreManager instance; //Do ScoreManager.instance.AddPoint(); in the method for completing an order
+    public static ScoreManager instance; 
 
     public Text scoreText;
     public Text highscoreText;
+    public Text multiplierText;
 
     int score = 0;
     int highscore = 0;
@@ -23,6 +24,7 @@ public class ScoreManager : MonoBehaviour
         highscore = PlayerPrefs.GetInt("highscore", 0);
         scoreText.text = "SCORE: " + score.ToString();
         highscoreText.text = "HIGHSCORE: " + highscore.ToString();
+        UpdateMultiplierText(1);
     }
 
     public void AddScore(int multiplier)
@@ -33,5 +35,10 @@ public class ScoreManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("highscore", score);
         }
+    }
+
+    public void UpdateMultiplierText(int multiplier)
+    {
+        multiplierText.text = multiplier + "x"; 
     }
 }

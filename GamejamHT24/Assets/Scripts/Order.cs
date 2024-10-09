@@ -58,6 +58,7 @@ public class Order : MonoBehaviour
             }
 
             ScoreManager.instance.AddScore(multiplier);
+            ScoreManager.instance.UpdateMultiplierText(multiplier);
         }
 
         else
@@ -65,6 +66,7 @@ public class Order : MonoBehaviour
             consecutiveCorrectItems = 0;
             multiplier = 1;
 
+            ScoreManager.instance.UpdateMultiplierText(multiplier);
             Destroy(other.gameObject, 0.1f);
         }
 
@@ -86,8 +88,14 @@ public class Order : MonoBehaviour
         if (orders.Count <= 0)
         {
             ScoreManager scoreManager = GameObject.Find("Canvas").GetComponent<ScoreManager>();
-            scoreManager.AddScore();
+            scoreManager.AddScore(multiplier);
             ordersCompleted++;
+
+            TrayRemover trayRemover = GetComponent<TrayRemover>();
+            if (trayRemover != null)
+            {
+                trayRemover.RemoveTray();  
+            }
 
             Destroy(gameObject, 0.1f);
         }
@@ -170,6 +178,11 @@ public class Order : MonoBehaviour
     private IEnumerator Despawn()
     {
         yield return new WaitForSeconds(UnityEngine.Random.Range(8, 13));
+        TrayRemover trayRemover = GetComponent<TrayRemover>();
+        if (trayRemover != null)
+        {
+            trayRemover.RemoveTray();  
+        }
         Destroy(gameObject);
     }
 

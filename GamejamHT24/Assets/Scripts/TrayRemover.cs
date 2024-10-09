@@ -5,7 +5,7 @@ public class TrayRemover : MonoBehaviour
     public delegate void TrayRemovedAction();
     public event TrayRemovedAction OnTrayRemoved;
 
-    public float removalDelay = 0.5f; 
+    public float removalDelay = 0.1f; 
 
     public void RemoveTray()
     {
