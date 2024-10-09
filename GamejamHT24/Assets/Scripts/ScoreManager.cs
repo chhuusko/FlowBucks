@@ -8,15 +8,17 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager instance; 
 
     public Text scoreText;
-    public Text highscoreText;
+    //public Text highscoreText;
     public Text multiplierText;
+    public Text TextTargetScore;
 
     int score = 0;
-    int highscore = 0;
+    //int highscore = 0;
 
     private int consecutiveCorrectItems = 0;
     private int multiplier = 1;
     private int ordersCompleted;
+    private int targetScore;
 
     private void Awake()
     {
@@ -25,25 +27,48 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
-        highscore = PlayerPrefs.GetInt("highscore", 0);
+        //highscore = PlayerPrefs.GetInt("highscore", 0);
+        SetTargetScoreForScene();
         scoreText.text = "$ made: " + score.ToString();
-        highscoreText.text = "Target $: " + highscore.ToString();
+        //highscoreText.text = "Target $: " + highscore.ToString();
         UpdateMultiplierText();
+        UpdateTargetScoreText();
+    }
+
+    private void SetTargetScoreForScene()
+    {
+        switch (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name)
+        {
+            case "Main":
+                targetScore = 100;
+                break;
+            case "Day2":
+                targetScore = 200;
+                break;
+            case "Day3":
+                targetScore = 300;
+                break;
+        }
     }
 
     public void AddScore(int points)
     {
         score += points * multiplier;
         scoreText.text = "$ made: " + score.ToString();
-        if (highscore < score)
-        {
-            PlayerPrefs.SetInt("highscore", score);
-        }
+        //if (highscore < score)
+        //{
+        //    PlayerPrefs.SetInt("highscore", score);
+        //}
     }
 
     public void UpdateMultiplierText()
     {
         multiplierText.text = "Flow " + multiplier + "x"; 
+    }
+    
+    public void UpdateTargetScoreText()
+    {
+        TextTargetScore.text = "Target $: " + targetScore.ToString();
     }
 
     public void IncreaseStreak()
