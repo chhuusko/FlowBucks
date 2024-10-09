@@ -14,7 +14,8 @@ public class TrayManager : MonoBehaviour
 
     void Start()
     {
-        isLocationOccupied = new bool[spawnLocations.Length]; 
+        isLocationOccupied = new bool[spawnLocations.Length];
+        SpawnTrayIfSpotAvailable();
         StartCoroutine(SpawnTrays());
     }
 
