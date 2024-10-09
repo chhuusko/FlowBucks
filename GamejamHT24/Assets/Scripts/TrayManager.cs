@@ -95,7 +95,10 @@ public class TrayManager : MonoBehaviour
     {
         yield return new WaitForSeconds(15.9f);
         MarkLocationAsFree(index);
+        if (tray == null)
+            yield break;
         tray.GetComponent<Order>().RemoveDonuts();
+        
         yield return new WaitForSeconds(0.1f);
         Destroy(tray);
     }

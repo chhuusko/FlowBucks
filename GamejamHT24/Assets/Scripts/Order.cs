@@ -45,8 +45,7 @@ public class Order : MonoBehaviour
 
         else
         {
-            ScoreManager.instance.ResetStreak();
-            StartCoroutine(GameObject.Find("TrayManager").GetComponent<TrayManager>().CompleteOrder(gameObject));
+            ScoreManager.instance.ResetStreak();   
             Destroy(other);
         }
 
@@ -56,8 +55,7 @@ public class Order : MonoBehaviour
             ScoreManager scoreManager = GameObject.Find("Canvas").GetComponent<ScoreManager>();
             scoreManager.AddScore(points);
             ordersCompleted++;
-
-            Destroy(gameObject, 0.1f);
+            StartCoroutine(GameObject.Find("TrayManager").GetComponent<TrayManager>().CompleteOrder(gameObject));
         }
     }
 
