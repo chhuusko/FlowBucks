@@ -35,7 +35,7 @@ public class TrayManager : MonoBehaviour
         if (availableIndex != -1)
         {
             Transform spawnPoint = spawnLocations[availableIndex];
-            GameObject newTray = Instantiate(trayPrefab, spawnPoint.position, spawnPoint.rotation);
+            GameObject newTray = Instantiate(trayPrefab, spawnPoint.position, trayPrefab.transform.rotation);
 
             StartCoroutine(Despawn(newTray, availableIndex));
             isLocationOccupied[availableIndex] = true;
