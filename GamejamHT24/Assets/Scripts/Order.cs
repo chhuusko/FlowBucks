@@ -23,7 +23,6 @@ public class Order : MonoBehaviour
     void Start()
     {
         GenerateOrder();
-        StartCoroutine("Despawn");
     }
 
     // Update is called once per frame
@@ -67,7 +66,7 @@ public class Order : MonoBehaviour
             multiplier = 1;
 
             ScoreManager.instance.UpdateMultiplierText(multiplier);
-            Destroy(other.gameObject, 0.1f);
+            StartCoroutine(GameObject.Find("TrayManager").GetComponent<TrayManager>().CompleteOrder(gameObject));
         }
 
         //foreach (ItemTypes item in orders.Keys)
@@ -90,12 +89,6 @@ public class Order : MonoBehaviour
             ScoreManager scoreManager = GameObject.Find("Canvas").GetComponent<ScoreManager>();
             scoreManager.AddScore(multiplier);
             ordersCompleted++;
-
-            TrayRemover trayRemover = GetComponent<TrayRemover>();
-            if (trayRemover != null)
-            {
-                trayRemover.RemoveTray();  
-            }
 
             Destroy(gameObject, 0.1f);
         }
@@ -173,17 +166,6 @@ public class Order : MonoBehaviour
         text.transform.position = transform.position + new Vector3(0, 0, -0.4f);
         text.transform.LookAt(Camera.main.transform);
         text.transform.rotation = Quaternion.Euler(new Vector3(60, 0, 0));
-    }
-
-    private IEnumerator Despawn()
-    {
-        yield return new WaitForSeconds(UnityEngine.Random.Range(8, 13));
-        TrayRemover trayRemover = GetComponent<TrayRemover>();
-        if (trayRemover != null)
-        {
-            trayRemover.RemoveTray();  
-        }
-        Destroy(gameObject);
     }
 
     private IEnumerator RemoveBonus()

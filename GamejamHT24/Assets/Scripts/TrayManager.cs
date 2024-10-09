@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class TraySpawner : MonoBehaviour
+public class TrayManager : MonoBehaviour
 {
     public GameObject trayPrefab; 
     public Transform[] spawnLocations; 
@@ -9,6 +10,7 @@ public class TraySpawner : MonoBehaviour
 
     private float baseSpawnInterval = 5f; 
     private bool[] isLocationOccupied; 
+    private Dictionary<GameObject, int> trays = new Dictionary<GameObject, int>();
 
     void Start()
     {
@@ -34,13 +36,9 @@ public class TraySpawner : MonoBehaviour
             Transform spawnPoint = spawnLocations[availableIndex];
             GameObject newTray = Instantiate(trayPrefab, spawnPoint.position, spawnPoint.rotation);
 
+            StartCoroutine(Despawn(newTray, availableIndex));
             isLocationOccupied[availableIndex] = true;
-
-            TrayRemover trayComponent = newTray.GetComponent<TrayRemover>();
-            if (trayComponent != null)
-            {
-                trayComponent.OnTrayRemoved += () => MarkLocationAsFree(availableIndex);
-            }
+            trays.Add(newTray, availableIndex);
         }
         else
         {
@@ -75,6 +73,20 @@ public class TraySpawner : MonoBehaviour
     void MarkLocationAsFree(int index)
     {
         isLocationOccupied[index] = false;
+    }
+
+    IEnumerator Despawn(GameObject tray, int index)
+    {
+        yield return new WaitForSeconds(UnityEngine.Random.Range(8, 13));
+        MarkLocationAsFree(index);
+        Destroy(tray);
+    }
+
+    public IEnumerator CompleteOrder(GameObject tray)
+    {
+        yield return new WaitForSeconds(0.1f);
+        MarkLocationAsFree(trays[tray]);
+        Destroy(tray);
     }
 }
 
