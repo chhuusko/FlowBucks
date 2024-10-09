@@ -8,21 +8,26 @@ public class ItemSpawner : MonoBehaviour
     [SerializeField] private List<GameObject> itemPrefabs = new List<GameObject>();
     [SerializeField] private GameObject spawner;
     [SerializeField] private GameObject canvas;
-    
+    [SerializeField] private float timeDividerValue = 100f;
     private InGameClock inGameClock;
-    private int randomRange1, randomRange2;
-    
-    
+    private int randomRange1 = 3, randomRange2 = 6;
+    private float time;
+
+
     void Start()
     {
+        inGameClock = canvas.GetComponent<InGameClock>();
         StartCoroutine(spawnItem());
     }
- 
+    private void Update()
+    {
+        time = inGameClock.timePassed;
+    }
+
     private IEnumerator spawnItem()
     {
         while (true)
         {
-            // Kontrollera om listan har objekt
             if (itemPrefabs.Count > 0)
             {
                 int randomItemNum = Random.Range(0, itemPrefabs.Count);
@@ -32,9 +37,7 @@ public class ItemSpawner : MonoBehaviour
             {
                 Debug.LogWarning("itemPrefabs listan är tom!");
             }
-
-            // Väntar en slumpmässig tid mellan 1 och 5 sekunder
-            int randomSpawnDelayNum = Random.Range(2, 6);
+            int randomSpawnDelayNum = Random.Range(Mathf.RoundToInt(randomRange1 - time/timeDividerValue), Mathf.RoundToInt(randomRange2 - time / timeDividerValue));
             Debug.Log(randomSpawnDelayNum);
             yield return new WaitForSeconds(randomSpawnDelayNum);
         }
