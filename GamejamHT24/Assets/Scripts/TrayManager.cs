@@ -11,7 +11,7 @@ public class TrayManager : MonoBehaviour
     private float baseSpawnInterval = 5f; 
     private bool[] isLocationOccupied; 
     private Dictionary<GameObject, int> trays = new Dictionary<GameObject, int>();
-    private int spawnPointAmount = 1;
+    private int spawnPointAmount = 2;
 
     void Start()
     {
