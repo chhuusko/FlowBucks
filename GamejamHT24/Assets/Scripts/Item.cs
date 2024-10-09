@@ -5,7 +5,7 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     public bool onPlate;
-
+    public GameObject Plate { get; private set; }
     [SerializeField] private ItemTypes type;
 
     public ItemTypes GetPastryType()
@@ -32,12 +32,16 @@ public class Item : MonoBehaviour
         {
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             onPlate = true;
+            Plate = collision.gameObject;
+            Plate.GetComponent<Order>().HandleCollsion(gameObject);
         }
 
         else if (collision.gameObject.CompareTag("draggable") && collision.gameObject.GetComponent<Item>().onPlate)
         {
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             onPlate = true;
+            Plate = collision.gameObject.GetComponent<Item>().Plate;
+            Plate.GetComponent<Order>().HandleCollsion(gameObject);
         }
     }
 }

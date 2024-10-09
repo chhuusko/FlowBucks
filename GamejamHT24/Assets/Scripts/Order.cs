@@ -22,13 +22,12 @@ public class Order : MonoBehaviour
         GenerateOrder();
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void HandleCollsion(GameObject other)
     {
-        if (!other.gameObject.CompareTag("draggable"))
+        if (!other.CompareTag("draggable"))
             return;
 
         ItemTypes item = other.GetComponent<Item>().GetPastryType();
-
 
         if (orders.ContainsKey(item))
         {
@@ -39,13 +38,14 @@ public class Order : MonoBehaviour
             {
                 orders.Remove(item);
             }
+            PrintReceipt();
         }
 
         else
         {
             ScoreManager.instance.ResetStreak();
             StartCoroutine(GameObject.Find("TrayManager").GetComponent<TrayManager>().CompleteOrder(gameObject));
-            Destroy(other.gameObject);
+            Destroy(other);
         }
 
         // Completes the order if there are no more items needed.
