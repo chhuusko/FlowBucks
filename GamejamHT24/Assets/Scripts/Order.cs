@@ -129,7 +129,7 @@ public class Order : MonoBehaviour
 
     private IEnumerator RemoveBonus()
     {
-        yield return new WaitForSeconds(8);
+        yield return new WaitForSeconds(UnityEngine.Random.Range(4, 7));
         bonusPoints = false;
     }
 }
