@@ -14,6 +14,10 @@ public class ScoreManager : MonoBehaviour
     int score = 0;
     int highscore = 0;
 
+    private int consecutiveCorrectItems = 0;
+    private int multiplier = 1;
+    private int ordersCompleted;
+
     private void Awake()
     {
         instance = this;
@@ -24,12 +28,12 @@ public class ScoreManager : MonoBehaviour
         highscore = PlayerPrefs.GetInt("highscore", 0);
         scoreText.text = "SCORE: " + score.ToString();
         highscoreText.text = "HIGHSCORE: " + highscore.ToString();
-        UpdateMultiplierText(1);
+        UpdateMultiplierText();
     }
 
-    public void AddScore(int multiplier)
+    public void AddScore(int points)
     {
-        score += 1 * multiplier; //Change to correct value for order completion
+        score += points * multiplier;
         scoreText.text = "SCORE: " + score.ToString();
         if (highscore < score)
         {
@@ -37,8 +41,27 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    public void UpdateMultiplierText(int multiplier)
+    public void UpdateMultiplierText()
     {
         multiplierText.text = multiplier + "x"; 
+    }
+
+    public void IncreaseStreak()
+    {
+        consecutiveCorrectItems++;
+
+        if (consecutiveCorrectItems >= 5)
+        {
+            multiplier *= 2;
+            consecutiveCorrectItems = 0;
+        }
+        UpdateMultiplierText();
+    }
+
+    public void ResetStreak()
+    {
+        consecutiveCorrectItems = 0;
+        multiplier = 1;
+        UpdateMultiplierText();
     }
 }

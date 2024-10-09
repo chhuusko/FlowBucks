@@ -56,9 +56,13 @@ PrefabInstance:
       propertyPath: m_ReflectionProbeUsage
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: eb4f57afa28630b4f9fbf6ad5270e809, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 823fb2faef384cf44b990c7731669050, type: 2}
     - target: {fileID: 919132149155446097, guid: eb4f57afa28630b4f9fbf6ad5270e809, type: 3}
       propertyPath: m_Name
-      value: donut_prototype
+      value: Chocolate_Donut
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: eb4f57afa28630b4f9fbf6ad5270e809, type: 3}
       propertyPath: m_IsActive
