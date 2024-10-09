@@ -29,7 +29,6 @@ public class Order : MonoBehaviour
 
         ItemTypes item = other.GetComponent<Item>().GetPastryType();
 
-
         if (orders.ContainsKey(item))
         {
             orders[item]--;
@@ -39,6 +38,7 @@ public class Order : MonoBehaviour
             {
                 orders.Remove(item);
             }
+            PrintReceipt();
         }
 
         else
