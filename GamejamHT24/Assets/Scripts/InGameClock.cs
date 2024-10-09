@@ -27,7 +27,7 @@ public class InGameClock : MonoBehaviour
             IncrementTime(); 
             UpdateTimeDisplay();
 
-            if (hour == 22 && minute == 0)
+            if (hour == 20 && minute == 0)
             {
                 EndGame();
                 yield break; 
