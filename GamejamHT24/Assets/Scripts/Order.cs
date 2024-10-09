@@ -14,7 +14,6 @@ public class Order : MonoBehaviour
     // Save all generated orders in dictionary.
     private Dictionary<ItemTypes, int> orders = new Dictionary<ItemTypes, int>();
     private List<GameObject> items = new List<GameObject>();
-    [SerializeField] private Sprite[] sprites = new Sprite[0];
 
     [SerializeField] private UnityEngine.UI.Image clockImage;
     private bool bonusPoints = true;
@@ -79,7 +78,7 @@ public class Order : MonoBehaviour
         PrintReceipt();
         StartCoroutine(ChangeClock());
         clockImage.transform.position = transform.position + new Vector3(0.4f, 0.1f, -0.4f);
-        clockImage.transform.LookAt(Camera.main.transform);
+        //clockImage.transform.LookAt(Camera.main.transform);
         clockImage.transform.rotation = Quaternion.Euler(new Vector3(60, 0, 0));
     }
 
@@ -106,9 +105,11 @@ public class Order : MonoBehaviour
 
         while (totalTime < 16)
         {
-            clockImage.sprite = sprites[totalTime / 4];
+            clockImage.transform.rotation = Quaternion.Euler(new Vector3(60, 0, -22.5f * totalTime));
             yield return new WaitForSeconds(4);
             totalTime += 4;
+
+            clockImage.color = new Color(1.0f, 1.0f - (totalTime / 15.0f), 1.0f - (totalTime / 15.0f));
         }
     }
 
