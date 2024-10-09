@@ -27,6 +27,8 @@ public class Item : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (onPlate)
+            return;
         // Freeze the object if it collides with the plate or another object stuck to the plate.
         if (collision.gameObject.CompareTag("Tray"))
         {

@@ -80,6 +80,7 @@ public class TrayManager : MonoBehaviour
     {
         yield return new WaitForSeconds(16);
         MarkLocationAsFree(index);
+        tray.GetComponent<Order>().RemoveDonuts();
         Destroy(tray);
     }
 
@@ -87,6 +88,7 @@ public class TrayManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         MarkLocationAsFree(trays[tray]);
+        tray.GetComponent<Order>().RemoveDonuts();
         Destroy(tray);
     }
 }

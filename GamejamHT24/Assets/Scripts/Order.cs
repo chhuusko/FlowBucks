@@ -12,6 +12,7 @@ public class Order : MonoBehaviour
 
     // Save all generated orders in dictionary.
     private Dictionary<ItemTypes, int> orders = new Dictionary<ItemTypes, int>();
+    private List<GameObject> items = new List<GameObject>();
 
     private bool bonusPoints = true;
     private int points;
@@ -32,6 +33,7 @@ public class Order : MonoBehaviour
         if (orders.ContainsKey(item))
         {
             orders[item]--;
+            items.Add(other);
             ScoreManager.instance.IncreaseStreak();
 
             if (orders[item] <= 0)
@@ -131,5 +133,13 @@ public class Order : MonoBehaviour
     {
         yield return new WaitForSeconds(8);
         bonusPoints = false;
+    }
+
+    public void RemoveDonuts()
+    {
+        foreach(GameObject g in items)
+        {
+            Destroy(g);
+        }
     }
 }
