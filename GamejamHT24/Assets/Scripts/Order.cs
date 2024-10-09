@@ -16,6 +16,8 @@ public class Order : MonoBehaviour
 
     private bool bonusPoints = true;
     private int points;
+    private int max = 4;
+    private int currentMax = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -63,10 +65,10 @@ public class Order : MonoBehaviour
 
     private void GenerateOrder()
     {
-        int maxOrders = 2000;
-        for (int i = 0; i < maxOrders; i++)
+        int lines = UnityEngine.Random.Range(1, currentMax + 1);
+        for (int i = 0; i < lines; i++)
         {
-            int amount = UnityEngine.Random.Range(1, 4);
+            int amount = UnityEngine.Random.Range(1, currentMax + 1);
             ItemTypes item = (ItemTypes)UnityEngine.Random.Range(0, 3);
 
             if (!orders.ContainsKey(item))
@@ -140,6 +142,18 @@ public class Order : MonoBehaviour
         foreach(GameObject g in items)
         {
             Destroy(g);
+        }
+    }
+
+    private IEnumerator IncreaseMax()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(60);
+            currentMax++;
+
+            if (currentMax >= max)
+                break;
         }
     }
 }
