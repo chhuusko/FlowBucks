@@ -16,6 +16,7 @@ public class ScoreManager : MonoBehaviour
     //int highscore = 0;
 
     private int consecutiveCorrectItems = 0;
+    private int correctItemsNeeded = 5;
     private int multiplier = 1;
     private int ordersCompleted;
     private int targetScore;
@@ -33,6 +34,16 @@ public class ScoreManager : MonoBehaviour
         //highscoreText.text = "Target $: " + highscore.ToString();
         UpdateMultiplierText();
         UpdateTargetScoreText();
+    }
+
+    private void Update()
+    {
+#if UNITY_EDITOR
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            correctItemsNeeded = 1;
+        }
+#endif
     }
 
     private void SetTargetScoreForScene()
@@ -75,7 +86,7 @@ public class ScoreManager : MonoBehaviour
     {
         consecutiveCorrectItems++;
 
-        if (consecutiveCorrectItems >= 5)
+        if (consecutiveCorrectItems >= correctItemsNeeded)
         {
             multiplier *= 2;
             consecutiveCorrectItems = 0;
