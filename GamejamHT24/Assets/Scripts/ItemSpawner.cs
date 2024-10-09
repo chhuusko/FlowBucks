@@ -7,6 +7,10 @@ public class ItemSpawner : MonoBehaviour
 {
     [SerializeField] private List<GameObject> itemPrefabs = new List<GameObject>();
     [SerializeField] private GameObject spawner;
+    [SerializeField] private GameObject canvas;
+    
+    private InGameClock inGameClock;
+    private int randomRange1, randomRange2;
     
     
     void Start()
