@@ -13,6 +13,7 @@ public class Order : MonoBehaviour
     // Save all generated orders in dictionary.
     private Dictionary<ItemTypes, int> orders = new Dictionary<ItemTypes, int>();
     private List<GameObject> items = new List<GameObject>();
+    [SerializeField] private Sprite[] sprites = new Sprite[0];
 
     private bool bonusPoints = true;
     private int points;
