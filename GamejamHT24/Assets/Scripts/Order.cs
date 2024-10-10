@@ -8,6 +8,8 @@ using static System.Net.Mime.MediaTypeNames;
 
 public class Order : MonoBehaviour
 {
+    public const int ORDER_TIME = 30;
+
     public static string recentRecepit;
     public static int ordersCompleted = 0;
 
@@ -101,15 +103,17 @@ public class Order : MonoBehaviour
 
     private IEnumerator ChangeClock()
     {
-        int totalTime = 0;
+        float totalTime = 0;
 
-        while (totalTime < 16)
+        while (totalTime < ORDER_TIME)
         {
-            clockImage.transform.rotation = Quaternion.Euler(new Vector3(60, 0, -22.5f * totalTime));
-            yield return new WaitForSeconds(4);
-            totalTime += 4;
+            // The clock rotates 90 degrees every 1/4 of the total time before it despawns.
+            clockImage.transform.rotation = Quaternion.Euler(new Vector3(60, 0, -totalTime / ORDER_TIME * 360f));
+            yield return new WaitForSeconds(ORDER_TIME / 4.0f);
+            totalTime += ORDER_TIME / 4.0f;
 
-            clockImage.color = new Color(1.0f, 1.0f - (totalTime / 15.0f), 1.0f - (totalTime / 15.0f));
+            // The clock successively becomes a more and more intense red the closer it gets to being destroyed.
+            clockImage.color = new Color(1.0f, 1.0f - (totalTime / ORDER_TIME), 1.0f - (totalTime / ORDER_TIME));
         }
     }
 

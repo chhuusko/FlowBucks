@@ -93,7 +93,7 @@ public class TrayManager : MonoBehaviour
 
     IEnumerator Despawn(GameObject tray, int index)
     {
-        yield return new WaitForSeconds(15.9f);
+        yield return new WaitForSeconds(Order.ORDER_TIME - 0.1f);
         if (tray == null)
             yield break;
         tray.GetComponent<Order>().RemoveDonuts();
