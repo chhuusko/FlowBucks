@@ -70,8 +70,8 @@ public class Item : MonoBehaviour
 
     private IEnumerator Freeze()
     {
-        yield return new WaitForSeconds(0.5f);
         Plate.GetComponent<Order>().HandleCollsion(gameObject);
+        yield return new WaitForSeconds(0.5f);
         GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
     }
 }
