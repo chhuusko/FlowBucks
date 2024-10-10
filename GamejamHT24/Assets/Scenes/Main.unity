@@ -7449,7 +7449,7 @@ MonoBehaviour:
   canvas: {fileID: 820265123}
   originalbeltSpeed: 1
   originalAnimationSpeed: 0.8
-  timeDividerValue: 100
+  timeDividerValue: 300
   animationDividerValue: 100
 --- !u!4 &679293102 stripped
 Transform:
@@ -7946,7 +7946,7 @@ MonoBehaviour:
   - {fileID: 8782810139828258592, guid: b471ffa77f791c149970a21534402a30, type: 3}
   spawner: {fileID: 723508162}
   canvas: {fileID: 820265123}
-  timeDividerValue: 75
+  timeDividerValue: 25
 --- !u!4 &723508164
 Transform:
   m_ObjectHideFlags: 0
@@ -12118,7 +12118,7 @@ MonoBehaviour:
   - {fileID: 2461865530506602390, guid: d1813f3d67432684fb51e32e13a44f74, type: 3}
   spawner: {fileID: 1136039165}
   canvas: {fileID: 820265123}
-  timeDividerValue: 75
+  timeDividerValue: 25
 --- !u!4 &1136039167
 Transform:
   m_ObjectHideFlags: 0
