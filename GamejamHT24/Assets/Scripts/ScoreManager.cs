@@ -18,6 +18,7 @@ public class ScoreManager : MonoBehaviour
     private int consecutiveCorrectItems = 0;
     private int correctItemsNeeded = 5;
     private int multiplier = 1;
+    private int maxMultiplier = 8;
     private int ordersCompleted;
     private int targetScore;
 
@@ -93,7 +94,10 @@ public class ScoreManager : MonoBehaviour
 
         if (consecutiveCorrectItems >= correctItemsNeeded)
         {
-            multiplier *= 2;
+            if (multiplier < maxMultiplier) 
+            {
+                multiplier *= 2;
+            }
             consecutiveCorrectItems = 0;
         }
         UpdateMultiplierText();
