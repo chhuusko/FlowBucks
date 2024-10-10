@@ -70,6 +70,12 @@ public class InGameClock : MonoBehaviour
         }
         Time.timeScale = 0;
     }
+
+    public void TriggerLossCondition()
+    {
+        EndScreenLoss.SetActive(true);
+        Time.timeScale = 0;  
+    }
 }
 
 
