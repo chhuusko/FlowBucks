@@ -21,8 +21,8 @@ public class ScoreManager : MonoBehaviour
     private int maxMultiplier = 8;
     private int ordersCompleted;
     private int targetScore;
-    private AudioClip errorClip;
-    private AudioClip successClip;
+    private AudioClip decreaseClip;
+    private AudioClip increaseClip;
     private AudioSource source;
 
     private void Awake()
@@ -38,11 +38,9 @@ public class ScoreManager : MonoBehaviour
         //highscoreText.text = "Target $: " + highscore.ToString();
         UpdateMultiplierText();
         UpdateTargetScoreText();
-        errorClip = Resources.Load<AudioClip>("Audio/Effects/Error");
-        successClip = Resources.Load<AudioClip>("Audio/Effects/success");
+        decreaseClip = Resources.Load<AudioClip>("Audio/Effects/FlowLoss");
+        increaseClip = Resources.Load<AudioClip>("Audio/Effects/Flow increase");
         source = GameObject.Find("SoundManager").GetComponent<AudioSource>();
-        Debug.Log(errorClip.ToString());
-        Debug.Log(successClip.ToString());
     }
 
     private void Update()
@@ -75,7 +73,6 @@ public class ScoreManager : MonoBehaviour
     {
         score += points * multiplier;
         scoreText.text = "$ made: " + score.ToString();
-        source.PlayOneShot(successClip);
         //if (highscore < score)
         //{
         //    PlayerPrefs.SetInt("highscore", score);
@@ -106,6 +103,8 @@ public class ScoreManager : MonoBehaviour
             if (multiplier < maxMultiplier) 
             {
                 multiplier *= 2;
+                source.pitch = 1 + (0.1f * multiplier);
+                source.PlayOneShot(increaseClip, UnityEngine.Random.Range(0.9f, 1.1f));
             }
             consecutiveCorrectItems = 0;
         }
@@ -116,7 +115,8 @@ public class ScoreManager : MonoBehaviour
     {
         consecutiveCorrectItems = 0;
         multiplier = 1;
-        source.PlayOneShot(errorClip);
+        source.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+        source.PlayOneShot(decreaseClip, UnityEngine.Random.Range(0.9f, 1.1f));
         UpdateMultiplierText();
     }
 }
