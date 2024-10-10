@@ -66,7 +66,7 @@ public class InGameClock : MonoBehaviour
         clockText.text = formattedTime;
     }
 
-    void EndGame()
+    public void EndGame()
     {
         if (ScoreManager.instance.HasReachedTargetScore())
         {

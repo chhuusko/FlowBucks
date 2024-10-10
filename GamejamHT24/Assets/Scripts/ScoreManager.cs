@@ -13,6 +13,8 @@ public class ScoreManager : MonoBehaviour
     public Text TextTargetScore;
 
     int score = 0;
+    private int targetScore;
+    private int originalTargetScore = 3000;
     //int highscore = 0;
 
     private int consecutiveCorrectItems = 0;
@@ -20,7 +22,6 @@ public class ScoreManager : MonoBehaviour
     private int multiplier = 1;
     private int maxMultiplier = 8;
     private int ordersCompleted;
-    private int targetScore;
     private AudioClip decreaseClip;
     private AudioClip increaseClip;
     private AudioClip orderCompleteClip;
@@ -35,9 +36,17 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
+        if (DayManager.currentDay == 1)
+        {
+            targetScore = originalTargetScore;
+        }
+
         //highscore = PlayerPrefs.GetInt("highscore", 0);
-        SetTargetScoreForScene();
+        score = 0;
+        targetScore = originalTargetScore; // Always reset to originalTargetScore at the start
+        UpdateTargetScoreText();
         scoreText.text = "$ made: " + score.ToString();
+        UpdateMultiplierText();
         //highscoreText.text = "Target $: " + highscore.ToString();
         UpdateMultiplierText();
         UpdateTargetScoreText();
@@ -62,20 +71,34 @@ public class ScoreManager : MonoBehaviour
 #endif
     }
 
-    private void SetTargetScoreForScene()
+    //private void SetTargetScoreForScene()
+    //{
+    //    targetScore = PlayerPrefs.GetInt("targetScore", 30);
+
+    //    //switch (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name)
+    //    //{
+    //    //    case "Main":
+    //    //        targetScore = 3000;
+    //    //        break;
+    //    //    case "Day 2":
+    //    //        targetScore = 4000;
+    //    //        break;
+    //    //    case "Day 3":
+    //    //        targetScore = 5000;
+    //    //        break;
+    //    //}
+    //}
+
+    public void IncreaseTargetScore()
     {
-        switch (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name)
-        {
-            case "Main":
-                targetScore = 3000;
-                break;
-            case "Day 2":
-                targetScore = 4000;
-                break;
-            case "Day 3":
-                targetScore = 5000;
-                break;
-        }
+        targetScore += 1000; 
+        UpdateTargetScoreText(); 
+    }
+
+    public void ResetTargetScore()
+    {
+        targetScore = originalTargetScore;
+        UpdateTargetScoreText();
     }
 
     public void AddScore(int points)
@@ -84,6 +107,11 @@ public class ScoreManager : MonoBehaviour
         scoreText.text = "$ made: " + score.ToString();
         effectSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
         effectSource.PlayOneShot(orderCompleteClip, UnityEngine.Random.Range(0.7f, 0.9f));
+
+        if (score >= targetScore)
+        {
+            GameObject.FindObjectOfType<InGameClock>().EndGame();  
+        }
         //if (highscore < score)
         //{
         //    PlayerPrefs.SetInt("highscore", score);

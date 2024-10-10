@@ -153,12 +153,30 @@ public class Order : MonoBehaviour
 
         foreach (ItemTypes item in orders.Keys)
         {
-            receipt += orders[item] + "x " + item.ToString() + "\n";
+            string colorTag = "";
+
+            switch (item)
+            {
+                case ItemTypes.Chocolate:
+                    colorTag = "<color=#381411>";  
+                    break;
+                case ItemTypes.Blueberry:
+                    colorTag = "<color=#04CCF0>";  
+                    break;
+                case ItemTypes.Strawberry:
+                    colorTag = "<color=#E770F0>";  
+                    break;
+                case ItemTypes.Coffee:
+                    colorTag = "<color=#000000>";  
+                    break;
+            }
+
+            receipt += colorTag + orders[item] + "x " + item.ToString() + "</color>\n";
         }
 
         Transform text = transform.Find("Canvas").Find("Receipt");
-
         text.GetComponent<TMP_Text>().text = receipt;
+
         text.transform.position = transform.position + new Vector3(-0.45f, 0.075f, 0.0f);
         text.transform.LookAt(Camera.main.transform);
         text.transform.rotation = Quaternion.Euler(new Vector3(60, 0, 0));
