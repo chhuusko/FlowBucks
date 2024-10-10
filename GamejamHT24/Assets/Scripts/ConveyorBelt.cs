@@ -31,7 +31,6 @@ public class ConveyorBelt : MonoBehaviour
         if(animator != null)
         {
             animator.speed = originalAnimationSpeed + time/ animationDividerValue;
-            Debug.Log(animator.speed);
         }
     }
     private void OnCollisionStay(Collision other)
