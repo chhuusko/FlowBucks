@@ -13,8 +13,7 @@ public class ScoreManager : MonoBehaviour
     public Text TextTargetScore;
 
     int score = 0;
-    private int targetScore;
-    private int originalTargetScore = 3000;
+    private int targetScore = 3000; 
     //int highscore = 0;
 
     private int consecutiveCorrectItems = 0;
@@ -36,14 +35,7 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
-        if (DayManager.currentDay == 1)
-        {
-            targetScore = originalTargetScore;
-        }
-
         //highscore = PlayerPrefs.GetInt("highscore", 0);
-        score = 0;
-        targetScore = originalTargetScore; // Always reset to originalTargetScore at the start
         UpdateTargetScoreText();
         scoreText.text = "$ made: " + score.ToString();
         UpdateMultiplierText();
@@ -89,15 +81,15 @@ public class ScoreManager : MonoBehaviour
     //    //}
     //}
 
-    public void IncreaseTargetScore()
+    public void SetTargetScore(int newTargetScore)
     {
-        targetScore += 1000; 
+        targetScore = newTargetScore; 
         UpdateTargetScoreText(); 
     }
 
-    public void ResetTargetScore()
+    public void IncreaseTargetScore(int amount)
     {
-        targetScore = originalTargetScore;
+        targetScore += amount;
         UpdateTargetScoreText();
     }
 

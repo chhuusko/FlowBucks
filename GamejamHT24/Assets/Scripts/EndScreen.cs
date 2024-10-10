@@ -29,8 +29,6 @@ public class EndScreen : MonoBehaviour
     {
         dayManager.IncrementDay();
 
-        ScoreManager.instance.IncreaseTargetScore();
-
         string currentScene = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentScene);
 
