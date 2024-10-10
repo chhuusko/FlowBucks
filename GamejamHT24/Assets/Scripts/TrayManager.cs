@@ -8,7 +8,7 @@ public class TrayManager : MonoBehaviour
     public GameObject trayPrefab; 
     public Transform[] spawnLocations; 
     public InGameClock gameClock;
-    public Text failedOrdersText;
+    public Slider failedOrdersSlider;
 
     private float baseSpawnInterval = 5f; 
     private bool[] isLocationOccupied; 
@@ -20,6 +20,9 @@ public class TrayManager : MonoBehaviour
     void Start()
     {
         isLocationOccupied = new bool[spawnLocations.Length];
+        failedOrdersSlider.maxValue = maxFailedOrders;  
+        failedOrdersSlider.value = 10;  
+
         SpawnTrayIfSpotAvailable();
         StartCoroutine(SpawnTrays());
         StartCoroutine(IncreaseSpawnPoints());
@@ -107,7 +110,7 @@ public class TrayManager : MonoBehaviour
         Destroy(tray);
 
         failedOrders++;
-        UpdateFailedOrdersText();
+        UpdateFailedOrdersSlider();
     }
 
     public IEnumerator CompleteOrder(GameObject tray)
@@ -118,9 +121,9 @@ public class TrayManager : MonoBehaviour
         Destroy(tray);
     }
 
-    void UpdateFailedOrdersText()
+    void UpdateFailedOrdersSlider()
     {
-        failedOrdersText.text = $"Orders failed: {failedOrders}/{maxFailedOrders}";
+        failedOrdersSlider.value = failedOrders;
     }
 }
 
