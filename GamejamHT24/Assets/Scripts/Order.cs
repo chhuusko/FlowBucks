@@ -65,10 +65,15 @@ public class Order : MonoBehaviour
 
     private void GenerateOrder()
     {
+        int totalItems = 0;
         int lines = UnityEngine.Random.Range(1, DifficultyIncrease.CurrentMax + 1);
+        int maxItems = UnityEngine.Random.Range(lines, DifficultyIncrease.CurrentOrderSize + 1);
+
         for (int i = 0; i < lines; i++)
         {
-            int amount = UnityEngine.Random.Range(1, DifficultyIncrease.CurrentMax + 1);
+            int amount = UnityEngine.Random.Range(1, maxItems - totalItems - lines + i + 2);
+
+            totalItems += amount;
             ItemTypes item = (ItemTypes)UnityEngine.Random.Range(0, 4);
 
             if (!orders.ContainsKey(item))
