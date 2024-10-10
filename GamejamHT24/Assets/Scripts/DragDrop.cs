@@ -17,7 +17,10 @@ public class DragDrop : MonoBehaviour
     }
     private void OnDestroy()
     {
-        Cursor.visible = true;
+        if (selectedObject == null)
+        {
+            Cursor.visible = true;
+        }
     }
     private void moveObject()
     {
@@ -41,7 +44,6 @@ public class DragDrop : MonoBehaviour
                     Vector3 mouseWorldPos = GetMouseWorldPosition(objectPos);
                     offset = objectPos - mouseWorldPos;
                     selectedObject.transform.position = new Vector3(objectPos.x, moveHeight, objectPos.z);
-
                     Cursor.visible = false;
                 }
             }
