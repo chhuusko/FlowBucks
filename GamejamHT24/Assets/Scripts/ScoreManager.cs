@@ -49,8 +49,7 @@ public class ScoreManager : MonoBehaviour
 
         effectSource = GameObject.Find("SoundManager").GetComponents<AudioSource>()[0];
         musicSource = GameObject.Find("SoundManager").GetComponents<AudioSource>()[1];
-
-        musicSource.PlayOneShot(musicClip, 0.3f);
+        Invoke("StartMusic", 0.1f);
     }
 
     private void Update()
@@ -61,6 +60,11 @@ public class ScoreManager : MonoBehaviour
             correctItemsNeeded = 1;
         }
 #endif
+    }
+
+    private void StartMusic()
+    {
+        musicSource.PlayOneShot(musicClip, 0.3f);
     }
 
     //private void SetTargetScoreForScene()

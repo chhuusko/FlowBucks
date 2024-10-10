@@ -6,8 +6,8 @@ public class InGameClock : MonoBehaviour
 {
     public Text clockText;
     public float timePassed = 0f;
-    private int hour = 8;
-    private int minute = 0;
+    private int hour = 7;
+    private int minute = 45;
     private float timeInterval = 5f;
 
     public GameObject EndScreenWin;  
@@ -76,7 +76,7 @@ public class InGameClock : MonoBehaviour
         else
         {
             EndScreenLoss.SetActive(true);
-            effectSource.PlayOneShot(angryBoss, 1f);
+            effectSource.PlayOneShot(angryBoss, 1.5f);
             effectSource.PlayOneShot(lose, 1f);
         }
         Time.timeScale = 0;
@@ -84,7 +84,7 @@ public class InGameClock : MonoBehaviour
 
     public void TriggerLossCondition()
     {
-        effectSource.PlayOneShot(angryBoss, 1f);
+        effectSource.PlayOneShot(angryBoss, 1.5f);
         effectSource.PlayOneShot(lose, 1f);
         EndScreenLoss.SetActive(true);
         Time.timeScale = 0;  
