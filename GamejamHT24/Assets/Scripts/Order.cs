@@ -67,7 +67,7 @@ public class Order : MonoBehaviour
         for (int i = 0; i < lines; i++)
         {
             int amount = UnityEngine.Random.Range(1, DifficultyIncrease.CurrentMax + 1);
-            ItemTypes item = (ItemTypes)UnityEngine.Random.Range(0, 3);
+            ItemTypes item = (ItemTypes)UnityEngine.Random.Range(0, 4);
 
             if (!orders.ContainsKey(item))
             {
