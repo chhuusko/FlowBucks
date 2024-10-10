@@ -418,7 +418,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c00d689388594554e8a7f29e530ac963, type: 3}
   - {fileID: 21300000, guid: 81d26e71aaa02c644a89b5f068231297, type: 3}
   clockImage: {fileID: 6460742474083267218}
-  smokeObject: {fileID: 0}
+  smokeObject: {fileID: 8227065121180983989, guid: e8fa44e067aee0544a0ee1808933d8f3, type: 3}
 --- !u!65 &3913763535180265122
 BoxCollider:
   m_ObjectHideFlags: 0
