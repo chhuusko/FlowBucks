@@ -14,7 +14,6 @@ public class Order : MonoBehaviour
     public static int ordersCompleted = 0;
 
     // Save all generated orders in dictionary.
-    [SerializeField] private Sprite[] images = new Sprite[4];
     private Dictionary<ItemTypes, int> orders = new Dictionary<ItemTypes, int>();
     private List<GameObject> items = new List<GameObject>();
 
@@ -118,15 +117,12 @@ public class Order : MonoBehaviour
         while (totalTime < ORDER_TIME)
         {
             // The clock rotates 90 degrees every 1/4 of the total time before it despawns.
-            //clockImage.transform.rotation = Quaternion.Euler(new Vector3(60, 0, -totalTime / ORDER_TIME * 360f));
-
-            clockImage.sprite = images[Mathf.RoundToInt(totalTime / ORDER_TIME * 4)];
-
+            clockImage.transform.rotation = Quaternion.Euler(new Vector3(60, 0, -totalTime / ORDER_TIME * 360f));
             yield return new WaitForSeconds(ORDER_TIME / 4.0f);
             totalTime += ORDER_TIME / 4.0f;
 
             // The clock successively becomes a more and more intense red the closer it gets to being destroyed.
-            //clockImage.color = new Color(1.0f, 1.0f - (totalTime / ORDER_TIME), 1.0f - (totalTime / ORDER_TIME));
+            clockImage.color = new Color(1.0f, 1.0f - (totalTime / ORDER_TIME), 1.0f - (totalTime / ORDER_TIME));
         }
     }
 
@@ -159,7 +155,7 @@ public class Order : MonoBehaviour
         Transform text = transform.Find("Canvas").Find("Receipt");
 
         text.GetComponent<TMP_Text>().text = receipt;
-        text.transform.position = transform.position + new Vector3(-0.45f, 0.075f, 0.0f);
+        text.transform.position = transform.position + new Vector3(0, 0.1f, -0.4f);
         text.transform.LookAt(Camera.main.transform);
         text.transform.rotation = Quaternion.Euler(new Vector3(60, 0, 0));
     }
