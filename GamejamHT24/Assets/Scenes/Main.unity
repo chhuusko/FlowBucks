@@ -1509,7 +1509,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: you got fired!
+  m_text: You got fired!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 637f2e734fbe62242a0799d1d2a8200a, type: 2}
   m_sharedMaterial: {fileID: 2751621000495178620, guid: 637f2e734fbe62242a0799d1d2a8200a, type: 2}
