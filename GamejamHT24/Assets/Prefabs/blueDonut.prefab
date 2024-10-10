@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onPlate: 0
-  type: 2
+  type: 1
 --- !u!114 &-2260158322340885656
 MonoBehaviour:
   m_ObjectHideFlags: 0
