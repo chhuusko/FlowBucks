@@ -413,6 +413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clockImage: {fileID: 6460742474083267218}
+  smokeObject: {fileID: 8227065121180983989, guid: e8fa44e067aee0544a0ee1808933d8f3, type: 3}
 --- !u!65 &3913763535180265122
 BoxCollider:
   m_ObjectHideFlags: 0
