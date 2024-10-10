@@ -6,7 +6,9 @@ public class Item : MonoBehaviour
 {
     public bool onPlate;
     public GameObject Plate { get; private set; }
+
     [SerializeField] private ItemTypes type;
+    private bool scores;
 
     public ItemTypes GetPastryType()
     {
@@ -27,28 +29,37 @@ public class Item : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (onPlate)
-            return;
         // Freeze the object if it collides with the plate or another object stuck to the plate.
-        if (collision.gameObject.CompareTag("Tray"))
+        if (collision.gameObject.CompareTag("Tray") && !onPlate)
         {
-            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            //GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             onPlate = true;
             Plate = collision.gameObject;
-            Plate.GetComponent<Order>().HandleCollsion(gameObject);
+            StartCoroutine(Freeze());
+            //Plate.GetComponent<Order>().HandleCollsion(gameObject);
         }
 
-        else if (collision.gameObject.CompareTag("draggable") && collision.gameObject.GetComponent<Item>().onPlate)
+        else if (collision.gameObject.CompareTag("draggable") && collision.gameObject.GetComponent<Item>().onPlate && !onPlate)
         {
-            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            //GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             onPlate = true;
             Plate = collision.gameObject.GetComponent<Item>().Plate;
-            Plate.GetComponent<Order>().HandleCollsion(gameObject);
+            StartCoroutine(Freeze());
+            //Plate.GetComponent<Order>().HandleCollsion(gameObject);
         }
 
-        else if (collision.gameObject.CompareTag("Countertop"))
+        if (collision.gameObject.CompareTag("Countertop"))
         {
+            StopCoroutine(Freeze());
+            Debug.Log("Destroyed");
             Destroy(gameObject);
         }
+    }
+
+    private IEnumerator Freeze()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Plate.GetComponent<Order>().HandleCollsion(gameObject);
+        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
     }
 }
