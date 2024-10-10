@@ -10,7 +10,7 @@ public class ItemSpawner : MonoBehaviour
     [SerializeField] private GameObject canvas;
     [SerializeField] private float timeDividerValue = 100f;
     private InGameClock inGameClock;
-    private int randomRange1 = 5, randomRange2 = 8;
+    private int randomRange1 = 4, randomRange2 = 7;
     private float time;
 
 
@@ -37,7 +37,10 @@ public class ItemSpawner : MonoBehaviour
             {
                 Debug.LogWarning("itemPrefabs listan är tom!");
             }
-            int randomSpawnDelayNum = Random.Range(Mathf.RoundToInt(randomRange1 - time/timeDividerValue), Mathf.RoundToInt(randomRange2 - time / timeDividerValue));
+            int randomSpawnDelayNum = Random.Range(
+                Mathf.Max(1, Mathf.RoundToInt(randomRange1 - time / timeDividerValue)),
+                Mathf.Max(2, Mathf.RoundToInt(randomRange2 - time / timeDividerValue))
+            );
             Debug.Log(randomSpawnDelayNum);
             yield return new WaitForSeconds(randomSpawnDelayNum);
         }
