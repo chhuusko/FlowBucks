@@ -14,6 +14,7 @@ public class ConveyorBelt : MonoBehaviour
     private float beltSpeed;
     private float time;
     private Animator animator;
+   
     
     
     private void Start()
@@ -26,11 +27,15 @@ public class ConveyorBelt : MonoBehaviour
     }
     private void Update()
     {
+        
         time = inGameClock.timePassed;
-        beltSpeed = originalbeltSpeed + time/timeDividerValue;
-        if(animator != null)
+        //beltSpeed = originalbeltSpeed + time/timeDividerValue;
+        beltSpeed = Mathf.Min(originalbeltSpeed + time/timeDividerValue, 1.98f);
+        if (animator != null)
         {
-            animator.speed = originalAnimationSpeed + time/ animationDividerValue;
+            //animator.speed = originalAnimationSpeed + time/ animationDividerValue;
+            animator.speed = Mathf.Min(originalAnimationSpeed + time/ animationDividerValue, 1.78f);
+            Debug.Log("animator speed: " + animator.speed + "beltSpeed: " + beltSpeed);
         }
     }
     private void OnCollisionStay(Collision other)
