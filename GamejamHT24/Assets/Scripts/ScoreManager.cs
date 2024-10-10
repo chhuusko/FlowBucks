@@ -21,6 +21,9 @@ public class ScoreManager : MonoBehaviour
     private int maxMultiplier = 8;
     private int ordersCompleted;
     private int targetScore;
+    private AudioClip errorClip;
+    private AudioClip successClip;
+    private AudioSource source;
 
     private void Awake()
     {
@@ -35,6 +38,11 @@ public class ScoreManager : MonoBehaviour
         //highscoreText.text = "Target $: " + highscore.ToString();
         UpdateMultiplierText();
         UpdateTargetScoreText();
+        errorClip = Resources.Load<AudioClip>("Audio/Effects/Error");
+        successClip = Resources.Load<AudioClip>("Audio/Effects/success");
+        source = GameObject.Find("SoundManager").GetComponent<AudioSource>();
+        Debug.Log(errorClip.ToString());
+        Debug.Log(successClip.ToString());
     }
 
     private void Update()
@@ -67,6 +75,7 @@ public class ScoreManager : MonoBehaviour
     {
         score += points * multiplier;
         scoreText.text = "$ made: " + score.ToString();
+        source.PlayOneShot(successClip);
         //if (highscore < score)
         //{
         //    PlayerPrefs.SetInt("highscore", score);
@@ -107,6 +116,7 @@ public class ScoreManager : MonoBehaviour
     {
         consecutiveCorrectItems = 0;
         multiplier = 1;
+        source.PlayOneShot(errorClip);
         UpdateMultiplierText();
     }
 }

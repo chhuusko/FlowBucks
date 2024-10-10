@@ -47,7 +47,7 @@ public class Order : MonoBehaviour
 
         else
         {
-            ScoreManager.instance.ResetStreak();   
+            ScoreManager.instance.ResetStreak();
             Destroy(other);
         }
 
