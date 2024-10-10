@@ -24,7 +24,9 @@ public class ScoreManager : MonoBehaviour
     private AudioClip decreaseClip;
     private AudioClip increaseClip;
     private AudioClip orderCompleteClip;
-    private AudioSource source;
+    private AudioClip musicClip;
+    private AudioSource effectSource;
+    private AudioSource musicSource;
 
     private void Awake()
     {
@@ -42,7 +44,12 @@ public class ScoreManager : MonoBehaviour
         decreaseClip = Resources.Load<AudioClip>("Audio/Effects/FlowLoss");
         increaseClip = Resources.Load<AudioClip>("Audio/Effects/Flow increase");
         orderCompleteClip = Resources.Load<AudioClip>("Audio/Effects/OrderComplete");
-        source = GameObject.Find("SoundManager").GetComponent<AudioSource>();
+        musicClip = Resources.Load<AudioClip>("Audio/Effects/RampJazz4Min");
+
+        effectSource = GameObject.Find("SoundManager").GetComponents<AudioSource>()[0];
+        musicSource = GameObject.Find("SoundManager").GetComponents<AudioSource>()[1];
+
+        musicSource.PlayOneShot(musicClip, 0.3f);
     }
 
     private void Update()
@@ -75,8 +82,8 @@ public class ScoreManager : MonoBehaviour
     {
         score += points * multiplier;
         scoreText.text = "$ made: " + score.ToString();
-        source.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
-        source.PlayOneShot(orderCompleteClip, UnityEngine.Random.Range(0.9f, 1.1f));
+        effectSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+        effectSource.PlayOneShot(orderCompleteClip, UnityEngine.Random.Range(0.7f, 0.9f));
         //if (highscore < score)
         //{
         //    PlayerPrefs.SetInt("highscore", score);
@@ -107,8 +114,8 @@ public class ScoreManager : MonoBehaviour
             if (multiplier < maxMultiplier) 
             {
                 multiplier *= 2;
-                source.pitch = 1 + (0.1f * multiplier);
-                source.PlayOneShot(increaseClip, UnityEngine.Random.Range(0.9f, 1.1f));
+                effectSource.pitch = 1 + (0.1f * multiplier);
+                effectSource.PlayOneShot(increaseClip, UnityEngine.Random.Range(0.9f, 1.1f));
             }
             consecutiveCorrectItems = 0;
         }
@@ -119,8 +126,8 @@ public class ScoreManager : MonoBehaviour
     {
         consecutiveCorrectItems = 0;
         multiplier = 1;
-        source.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
-        source.PlayOneShot(decreaseClip, UnityEngine.Random.Range(0.9f, 1.1f));
+        effectSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+        effectSource.PlayOneShot(decreaseClip, UnityEngine.Random.Range(0.9f, 1.1f));
         UpdateMultiplierText();
     }
 }
