@@ -14,6 +14,7 @@ public class Order : MonoBehaviour
     public static int ordersCompleted = 0;
 
     // Save all generated orders in dictionary.
+    [SerializeField] private Sprite[] images = new Sprite[4];
     private Dictionary<ItemTypes, int> orders = new Dictionary<ItemTypes, int>();
     private List<GameObject> items = new List<GameObject>();
 
@@ -117,12 +118,15 @@ public class Order : MonoBehaviour
         while (totalTime < ORDER_TIME)
         {
             // The clock rotates 90 degrees every 1/4 of the total time before it despawns.
-            clockImage.transform.rotation = Quaternion.Euler(new Vector3(60, 0, -totalTime / ORDER_TIME * 360f));
+            //clockImage.transform.rotation = Quaternion.Euler(new Vector3(60, 0, -totalTime / ORDER_TIME * 360f));
+
+            clockImage.sprite = images[Mathf.RoundToInt(totalTime / ORDER_TIME * 4)];
+
             yield return new WaitForSeconds(ORDER_TIME / 4.0f);
             totalTime += ORDER_TIME / 4.0f;
 
             // The clock successively becomes a more and more intense red the closer it gets to being destroyed.
-            clockImage.color = new Color(1.0f, 1.0f - (totalTime / ORDER_TIME), 1.0f - (totalTime / ORDER_TIME));
+            //clockImage.color = new Color(1.0f, 1.0f - (totalTime / ORDER_TIME), 1.0f - (totalTime / ORDER_TIME));
         }
     }
 
