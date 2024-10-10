@@ -162,7 +162,7 @@ public class Order : MonoBehaviour
 
     private IEnumerator RemoveBonus()
     {
-        yield return new WaitForSeconds(8);
+        yield return new WaitForSeconds(ORDER_TIME / 2.0f);
         bonusPoints = false;
     }
 
