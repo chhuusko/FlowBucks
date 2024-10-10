@@ -62,7 +62,7 @@ public class Item : MonoBehaviour
             StopCoroutine(Freeze());
             Debug.Log("Destroyed");
             Instantiate(smokeObject, transform.position, Quaternion.identity);
-            effectSource.pitch = Random.Range(0.9f, 1.1f);
+            effectSource.pitch = Random.Range(0.7f, 1.1f);
             effectSource.PlayOneShot(destroyItem, 0.4f);
             Destroy(gameObject);
         }
