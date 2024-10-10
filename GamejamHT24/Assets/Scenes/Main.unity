@@ -323,6 +323,7 @@ MonoBehaviour:
   - {fileID: 152476112}
   gameClock: {fileID: 820265124}
   failedOrdersSlider: {fileID: 1098656817}
+  failedOrdersText: {fileID: 890508896}
 --- !u!4 &102137411
 Transform:
   m_ObjectHideFlags: 0
