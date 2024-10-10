@@ -12,9 +12,17 @@ public class InGameClock : MonoBehaviour
 
     public GameObject EndScreenWin;  
     public GameObject EndScreenLoss;
+    private AudioSource effectSource;
+    private AudioClip angryBoss;
+    private AudioClip lose;
+    private AudioClip win;
 
     void Start()
     {
+        angryBoss = Resources.Load<AudioClip>("Audio/Effects/Angry boss");
+        lose = Resources.Load<AudioClip>("Audio/Effects/LoseFailSound2");
+        win = Resources.Load<AudioClip>("Audio/Effects/WinScreen");
+        effectSource = GameObject.Find("SoundManager").GetComponents<AudioSource>()[0];
         StartCoroutine(UpdateClock());
         EndScreenWin.SetActive(false);
         EndScreenLoss.SetActive(false);
@@ -62,17 +70,22 @@ public class InGameClock : MonoBehaviour
     {
         if (ScoreManager.instance.HasReachedTargetScore())
         {
-            EndScreenWin.SetActive(true); 
+            EndScreenWin.SetActive(true);
+            effectSource.PlayOneShot(win, 1f);
         }
         else
         {
-            EndScreenLoss.SetActive(true); 
+            EndScreenLoss.SetActive(true);
+            effectSource.PlayOneShot(angryBoss, 1f);
+            effectSource.PlayOneShot(lose, 1f);
         }
         Time.timeScale = 0;
     }
 
     public void TriggerLossCondition()
     {
+        effectSource.PlayOneShot(angryBoss, 1f);
+        effectSource.PlayOneShot(lose, 1f);
         EndScreenLoss.SetActive(true);
         Time.timeScale = 0;  
     }

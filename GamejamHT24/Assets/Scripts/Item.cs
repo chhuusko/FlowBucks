@@ -9,6 +9,9 @@ public class Item : MonoBehaviour
     private ParticleSystem smokeParticles;
     [SerializeField] private GameObject smokeObject;
     [SerializeField] private ItemTypes type;
+    private AudioSource effectSource;
+    private AudioClip destroyItem;
+    private AudioClip placeItem;
     private bool scores;
 
     public ItemTypes GetPastryType()
@@ -20,6 +23,9 @@ public class Item : MonoBehaviour
     void Start()
     {
         smokeParticles = smokeObject.GetComponent<ParticleSystem>();
+        destroyItem = Resources.Load<AudioClip>("Audio/Effects/destroyItem2");
+        placeItem = Resources.Load<AudioClip>("Audio/Effects/PlacementDone");
+        effectSource = GameObject.Find("SoundManager").GetComponents<AudioSource>()[0];
     }
 
     // Update is called once per frame
@@ -45,6 +51,8 @@ public class Item : MonoBehaviour
             //GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             onPlate = true;
             Plate = collision.gameObject.GetComponent<Item>().Plate;
+            effectSource.pitch = Random.Range(0.7f, 0.9f);
+            effectSource.PlayOneShot(placeItem, 0.2f);
             StartCoroutine(Freeze());
             //Plate.GetComponent<Order>().HandleCollsion(gameObject);
         }
@@ -54,6 +62,8 @@ public class Item : MonoBehaviour
             StopCoroutine(Freeze());
             Debug.Log("Destroyed");
             Instantiate(smokeObject, transform.position, Quaternion.identity);
+            effectSource.pitch = Random.Range(0.9f, 1.1f);
+            effectSource.PlayOneShot(destroyItem, 0.4f);
             Destroy(gameObject);
         }
     }
