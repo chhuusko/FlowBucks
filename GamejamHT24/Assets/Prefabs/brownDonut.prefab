@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onPlate: 0
+  smokeObject: {fileID: 8227065121180983989, guid: e8fa44e067aee0544a0ee1808933d8f3, type: 3}
   type: 0
 --- !u!114 &1575844437768666249
 MonoBehaviour:

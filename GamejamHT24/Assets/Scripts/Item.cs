@@ -6,7 +6,8 @@ public class Item : MonoBehaviour
 {
     public bool onPlate;
     public GameObject Plate { get; private set; }
-
+    private ParticleSystem smokeParticles;
+    [SerializeField] private GameObject smokeObject;
     [SerializeField] private ItemTypes type;
     private bool scores;
 
@@ -18,7 +19,7 @@ public class Item : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        smokeParticles = smokeObject.GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -52,6 +53,7 @@ public class Item : MonoBehaviour
         {
             StopCoroutine(Freeze());
             Debug.Log("Destroyed");
+            Instantiate(smokeObject, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }
