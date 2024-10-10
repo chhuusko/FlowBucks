@@ -67,13 +67,13 @@ public class ScoreManager : MonoBehaviour
         switch (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name)
         {
             case "Main":
-                targetScore = 100;
+                targetScore = 3000;
                 break;
             case "Day 2":
-                targetScore = 200;
+                targetScore = 4000;
                 break;
             case "Day 3":
-                targetScore = 300;
+                targetScore = 5000;
                 break;
         }
     }
