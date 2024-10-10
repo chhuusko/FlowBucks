@@ -18,6 +18,8 @@ public class Order : MonoBehaviour
     private List<GameObject> items = new List<GameObject>();
 
     [SerializeField] private UnityEngine.UI.Image clockImage;
+    [SerializeField] private GameObject smokeObject;
+    private ParticleSystem smokeParticles;
     private bool bonusPoints = true;
     private int points;    
 
@@ -25,6 +27,7 @@ public class Order : MonoBehaviour
     void Start()
     {
         GenerateOrder();
+        smokeParticles = smokeObject.GetComponent<ParticleSystem>();
     }
 
     public void HandleCollsion(GameObject other)
@@ -50,6 +53,7 @@ public class Order : MonoBehaviour
         else
         {
             ScoreManager.instance.ResetStreak();
+            Instantiate(smokeObject, transform.position, Quaternion.identity);
             Destroy(other);
         }
 
