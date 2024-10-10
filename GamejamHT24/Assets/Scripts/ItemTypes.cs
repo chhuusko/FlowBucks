@@ -5,6 +5,6 @@ using UnityEngine;
 public enum ItemTypes
 {
     Chocolate,
-    Vanilla,
-    Glazed
+    Blueberry,
+    Strawberry
 }
