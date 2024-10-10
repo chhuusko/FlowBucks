@@ -52,7 +52,7 @@ public class Item : MonoBehaviour
             onPlate = true;
             Plate = collision.gameObject.GetComponent<Item>().Plate;
             effectSource.pitch = Random.Range(0.7f, 0.9f);
-            effectSource.PlayOneShot(placeItem, 0.2f);
+            effectSource.PlayOneShot(placeItem, 0.3f);
             StartCoroutine(Freeze());
             //Plate.GetComponent<Order>().HandleCollsion(gameObject);
         }
