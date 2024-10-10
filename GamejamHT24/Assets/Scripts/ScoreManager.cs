@@ -23,6 +23,7 @@ public class ScoreManager : MonoBehaviour
     private int targetScore;
     private AudioClip decreaseClip;
     private AudioClip increaseClip;
+    private AudioClip orderCompleteClip;
     private AudioSource source;
 
     private void Awake()
@@ -40,6 +41,7 @@ public class ScoreManager : MonoBehaviour
         UpdateTargetScoreText();
         decreaseClip = Resources.Load<AudioClip>("Audio/Effects/FlowLoss");
         increaseClip = Resources.Load<AudioClip>("Audio/Effects/Flow increase");
+        orderCompleteClip = Resources.Load<AudioClip>("Audio/Effects/OrderComplete");
         source = GameObject.Find("SoundManager").GetComponent<AudioSource>();
     }
 
@@ -73,6 +75,8 @@ public class ScoreManager : MonoBehaviour
     {
         score += points * multiplier;
         scoreText.text = "$ made: " + score.ToString();
+        source.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+        source.PlayOneShot(orderCompleteClip, UnityEngine.Random.Range(0.9f, 1.1f));
         //if (highscore < score)
         //{
         //    PlayerPrefs.SetInt("highscore", score);
