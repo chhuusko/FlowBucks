@@ -6,5 +6,6 @@ public enum ItemTypes
 {
     Chocolate,
     Blueberry,
-    Strawberry
+    Strawberry,
+    Coffee
 }
