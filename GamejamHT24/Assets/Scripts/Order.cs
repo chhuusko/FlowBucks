@@ -29,6 +29,7 @@ public class Order : MonoBehaviour
     {
         GenerateOrder();
         smokeParticles = smokeObject.GetComponent<ParticleSystem>();
+        ordersCompleted = 0;
     }
 
     public void HandleCollsion(GameObject other)
