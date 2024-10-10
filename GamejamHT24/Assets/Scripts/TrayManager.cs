@@ -1,17 +1,21 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class TrayManager : MonoBehaviour
 {
     public GameObject trayPrefab; 
     public Transform[] spawnLocations; 
-    public InGameClock gameClock; 
+    public InGameClock gameClock;
+    public Text failedOrdersText;
 
     private float baseSpawnInterval = 5f; 
     private bool[] isLocationOccupied; 
     private Dictionary<GameObject, int> trays = new Dictionary<GameObject, int>();
     private int spawnPointAmount = 2;
+    private int failedOrders = 0;  
+    private int maxFailedOrders = 10;
 
     void Start()
     {
@@ -101,6 +105,9 @@ public class TrayManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         MarkLocationAsFree(index);
         Destroy(tray);
+
+        failedOrders++;
+        UpdateFailedOrdersText();
     }
 
     public IEnumerator CompleteOrder(GameObject tray)
@@ -109,6 +116,11 @@ public class TrayManager : MonoBehaviour
         MarkLocationAsFree(trays[tray]);
         tray.GetComponent<Order>().RemoveDonuts();
         Destroy(tray);
+    }
+
+    void UpdateFailedOrdersText()
+    {
+        failedOrdersText.text = $"Orders failed: {failedOrders}/{maxFailedOrders}";
     }
 }
 
